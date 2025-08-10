@@ -2,7 +2,7 @@
 
 AMI_ID="ami-09c813fb71547fc4f"
 SG_ID="sg-03e454532f3f29b07"
-Instances=("MongoDB" "Catalouge" "Reddis" "Users" "Cart" "MySQL" "Shipping" "Rabbit_MQ" "Payment" "Dispatch" "Frontend")
+Instances=("MongoDB" "Catalouge" "Reddis" "Users" "Cart" "MySQL" "Shipping" "RabbitMQ" "Payment" "Dispatch" "Frontend")
 ZONE_ID="Z03584735O3LYRT2Q9HU"
 DOMAIN_NAME="manchem.site"
 
