@@ -84,7 +84,7 @@ Validate $? "Coping MongoDB Repo"
 dnf install mongodb-mongosh -y
 Validate $? "Installing MongoDB Client"
 
-STATUS=$(mongosh --host mongodb.daws84s.site --eval 'db.getMongo().getDBNames().indexOf("catalogue"))
+STATUS=$(mongosh --host mongodb.daws84s.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
 if [ $STATUS -eq 0 ]
 then
     echo " Data is Already Loaded"
