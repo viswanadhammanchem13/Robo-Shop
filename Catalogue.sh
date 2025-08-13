@@ -33,41 +33,41 @@ Validate (){ #Function Definition
     fi #Condition Ends
 }
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>$LOG_FILE
 Validate $? "Disabeling NodeJS"
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y &>>$LOG_FILE
 Validate $? "Enabling NodeJS:20"
 
-dnf install nodejs -y
+dnf install nodejs -y &>>$LOG_FILE
 Validate $? "Installling NodeJS"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
 Validate $? "Creating Roboshop user"
 
 mkdir /app
 Validate $? "Creating /app Dir"
 
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOG_FILE
 Validate $? "Downloading the Code"
 
-cd /app
+cd /app &>>$LOG_FILE
 Validate $? "Changing the Dir to /app"
 
-unzip /tmp/catalogue.zip
+unzip /tmp/catalogue.zip &>>$LOG_FILE
 Validate $? "Unzip the Code"
 
-npm install
+npm install &>>$LOG_FILE
 Validate $? "Dependencies installions"
 
-cp $SCRIPT_DIR/Catalogue.Service /etc/systemd/system/catalogue.service
+cp $SCRIPT_DIR/Catalogue.Service /etc/systemd/system/catalogue.service &>>$LOG_FILE
 Validate $? "Coping Catalogue Service"
 
-systemctl daemon-reload
+systemctl daemon-reload &>>$LOG_FILE
 Validate $? "System Daemon Reload"
 
-systemctl enable catalogue
+systemctl enable catalogue &>>$LOG_FILE
 Validate $? "Enabling Catalogue Service" 
-systemctl start catalogue
+systemctl start catalogue &>>$LOG_FILE
 Validate $? "Starting Catalogue Service" 
 
