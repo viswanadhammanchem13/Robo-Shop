@@ -10,7 +10,7 @@ LOGS_Folder="/var/log/Roboshop"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_Folder/$SCRIPT_NAME.log"
 DIR=$(mkdir  ($LOGS_Folder))
-if [ $? -ep 0 ]
+if [ $? -eq 0 ]
 then
     echo " $DIR is created"
 else
