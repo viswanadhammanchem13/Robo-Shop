@@ -66,7 +66,7 @@ Validate $? "Unzip the Code"
 npm install &>>$LOG_FILE
 Validate $? "Dependencies installions"
 
-cp $SCRIPT_DIR/Users.Service /etc/systemd/system/user.service &>>$LOG_FILE
+cp $SCRIPT_DIR/User.Service /etc/systemd/system/user.service &>>$LOG_FILE
 Validate $? "Coping Users Service"
 
 systemctl daemon-reload &>>$LOG_FILE
