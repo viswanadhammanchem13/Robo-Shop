@@ -27,12 +27,16 @@ Validate (){ #Function Definition
         echo -e " $R $2 ......is failed $N" | tee -a $LOG_FILE #Prints this messages on Screen
         exit 1 #Condition Exits and Entire Script Fails.
     fi #Condition Ends
+}
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>>LOG_FILE
 Validate $? "Coping of MongoDB Repo"
+
 dnf install mongodb-org -y &>>LOG_FILE
 Validate $? "MySQL Installation"
+
 systemctl enable mongod | tee -a $LOG_FILE
 Validate $? "MySQL Service Enabled" 
+
 systemctl start mongod | tee -a $LOG_FILE
 Validate $? "MySQL Service Started" 
