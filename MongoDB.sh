@@ -43,7 +43,7 @@ Validate $? "MySQL Service Enabled"
 systemctl start mongod | tee -a $LOG_FILE
 Validate $? "MySQL Service Started" 
 
-sed -i 's/127.0.0.1/0.0.0.0/g'
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
 Validate $? "Editing MongoDB conf file for remote connections"
 
 systemctl restart mongod
