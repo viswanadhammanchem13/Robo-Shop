@@ -91,6 +91,6 @@ then
 else
     echo "Data is Not Loaded..Loading"
     mongosh --host mongodb.manchem.site  </app/db/master-data.js
-
-Validate $? "Loading the Data"
+    Validate $? "Loading the Data"
+fi
 
