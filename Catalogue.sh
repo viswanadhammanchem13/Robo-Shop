@@ -67,7 +67,17 @@ systemctl daemon-reload &>>$LOG_FILE
 Validate $? "System Daemon Reload"
 
 systemctl enable catalogue &>>$LOG_FILE
-Validate $? "Enabling Catalogue Service" 
+Validate $? "Enabling Catalogue Service"
+
 systemctl start catalogue &>>$LOG_FILE
-Validate $? "Starting Catalogue Service" 
+Validate $? "Starting Catalogue Service"
+
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo &>>LOG_FILE
+Validate $? "Coping MongoDB Repo"
+
+dnf install mongodb-mongosh -y
+Validate $? "Installing MongoDB Client"
+
+mongosh --host mongodb.manchem.site  </app/db/master-data.js
+Validate $? "Loading the Data"
 
