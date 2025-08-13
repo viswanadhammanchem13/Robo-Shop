@@ -9,13 +9,8 @@ N="\e[0m"
 LOGS_Folder="/var/log/Roboshop"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_Folder/$SCRIPT_NAME.log"
-DIR=$(mkdir  ($LOGS_Folder))
-if [ $? -eq 0 ]
-then
-    echo " $DIR is created"
-else
-    echo " $DIR is Already Created"
-fi
+mkdir -p $LOGS_Folder
+
 echo -e  "$R Script Executed at:$TIME $N" | tee -a $LOG_FILE # Tee command Display the content on Screen
 if [ $USERID -ne 0 ] #Checks Whether UID is = 0 or not
 then #!= 0 Enter into Loop
