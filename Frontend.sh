@@ -50,3 +50,21 @@ Validate $? "Enable Nginx Packages"
 
 systemctl start nginx &>>$LOG_FILE
 Validate $? "Starting Nginx Packages"
+
+rm -rf /usr/share/nginx/html/* &>>$LOG_FILE
+Validate $? "Removing Default Content"
+
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$LOG_FILE
+Validate $? "Download the frontend content"
+
+cd /usr/share/nginx/html &>>$LOG_FILE
+Validate $? "Change to Default DIR"
+
+unzip /tmp/frontend.zip &>>$LOG_FILE
+Validate $? "Extract the frontend content."
+
+cp $SCRIPT_DIR/Frontend.Service /etc/nginx/nginx.conf &>>$LOG_FILE
+Validate $? "Coping Catalogue Service"
+
+systemctl restart nginx &>>$LOG_FILE
+Validate $? "Restarting Nginx Service" 
