@@ -63,7 +63,10 @@ Validate $? "Change to Default DIR"
 unzip /tmp/frontend.zip &>>$LOG_FILE
 Validate $? "Extract the frontend content."
 
-cp $SCRIPT_DIR/Frontend.Service /etc/nginx/nginx.conf &>>$LOG_FILE
+rm -rf /etc/nginx/nginx.conf &>>$LOG_FILE
+VALIDATE $? "Remove default nginx conf"
+
+cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf &>>$LOG_FILE
 Validate $? "Coping Catalogue Service"
 
 systemctl restart nginx &>>$LOG_FILE
