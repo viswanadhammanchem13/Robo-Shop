@@ -40,13 +40,13 @@ dnf module disable nginx -y &>>$LOG_FILE
 Validate $? "Disabling Nginx Packages"
 
 dnf module enable nginx:1.24 -y &>>$LOG_FILE
-Validate$? "Enabling Nginx Packages"
+Validate $? "Enabling Nginx Packages"
 
 dnf install nginx -y &>>$LOG_FILE
-Validate$? "Installing Nginx Packages"
+Validate $? "Installing Nginx Packages"
 
 systemctl enable nginx &>>$LOG_FILE
-Validate$? "Enable Nginx Packages"
+Validate $? "Enable Nginx Packages"
 
 systemctl start nginx &>>$LOG_FILE
-Validate$? "Starting Nginx Packages"
+Validate $? "Starting Nginx Packages"
