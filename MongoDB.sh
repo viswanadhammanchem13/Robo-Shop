@@ -26,10 +26,11 @@ Validate (){ #Function Definition
         exit 1 #Condition Exits and Entire Script Fails.
     fi #Condition Ends
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
-dnf install mongodb-org -y
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>>LOG_FILE
+Validate $? "Coping of MongoDB Repo"
+dnf install mongodb-org -y &>>LOG_FILE
 Validate $? "MySQL Installation"
-systemctl enable mongod
+systemctl enable mongod | tee -a $LOG_FILE
 Validate $? "MySQL Service Enabled" 
-systemctl start mongod
+systemctl start mongod | tee -a $LOG_FILE
 Validate $? "MySQL Service Started" 
