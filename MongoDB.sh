@@ -12,6 +12,7 @@ LOG_FILE="$LOGS_Folder/$SCRIPT_NAME.log"
 mkdir -p $LOGS_Folder
 
 echo -e  "$R Script Executed at:$TIME $N" | tee -a $LOG_FILE # Tee command Display the content on Screen
+
 if [ $USERID -ne 0 ] #Checks Whether UID is = 0 or not
 then #!= 0 Enter into Loop
     echo -e "$R Error:Please proceed the Installation with sudo $N" | tee -a $LOG_FILE #Prints this messages on Screen
@@ -41,3 +42,9 @@ Validate $? "MySQL Service Enabled"
 
 systemctl start mongod | tee -a $LOG_FILE
 Validate $? "MySQL Service Started" 
+
+sed -i 's/127.0.0.1/0.0.0.0/g'
+Validate $? "Editing MongoDB conf file for remote connections"
+
+systemctl restart mongod
+Validate $? "MySQL Service ReStarted" 
