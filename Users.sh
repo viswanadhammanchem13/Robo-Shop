@@ -72,7 +72,7 @@ Validate $? "Coping Users Service"
 systemctl daemon-reload &>>$LOG_FILE
 Validate $? "System Daemon Reload"
 
-systemctl enable users &>>$LOG_FILE
+systemctl enable user &>>$LOG_FILE
 
-systemctl start users &>>$LOG_FILE
+systemctl start user &>>$LOG_FILE
 Validate $? "Starting Users Service"
