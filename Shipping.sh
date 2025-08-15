@@ -9,6 +9,8 @@ N="\e[0m"
 LOGS_Folder="/var/log/Roboshop"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_Folder/$SCRIPT_NAME.log"
+SCRIPT_DIR=$PWD
+
 mkdir -p $LOGS_Folder
 
 echo -e  "$R Script Executed at:$START_TIME $N" | tee -a $LOG_FILE # Tee command Display the content on Screen
