@@ -84,7 +84,7 @@ Validate $? "Installing MYSQL Client"
 mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/schema.sql &>>$LOG_FILE
 mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/app-user.sql &>>$LOG_FILE
 mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/master-data.sql &>>$LOG_FILE
-VALIDATE $? "Loading data into MySQL"
+Validate $? "Loading data into MySQL"
 
 systemctl restart shipping &>>$LOG_FILE
 Validate $? "Restarting Shipping  Service"
