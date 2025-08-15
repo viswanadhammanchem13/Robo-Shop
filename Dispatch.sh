@@ -62,7 +62,7 @@ go get
 go build &>>$LOG_FILE
 Validate $? "Dependencies installions"
 
-cp $SCRIPT_DIR/Dispatch.Service /etc/systemd/system/payment.service &>>$LOG_FILE
+cp $SCRIPT_DIR/Dispatch.Service /etc/systemd/system/dispatch.service &>>$LOG_FILE
 Validate $? "Coping DisPatch Service"
 
 systemctl daemon-reload &>>$LOG_FILE
