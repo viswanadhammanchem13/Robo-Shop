@@ -1,5 +1,5 @@
 #!/bin/bash
-START_TIME=$(date)
+START_TIME=$(date +%s)
 USERID=$(id -u) #Stores User UID
 R="\e[31m"
 G="\e[32m"
