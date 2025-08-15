@@ -47,10 +47,10 @@ else
     Validate $? "RabbitMQ Repo is Already Added"
 fi
 
-# cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
+# cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
 # Validate $? "Copying RabbitMQ Repo"
 
-dnf install rabbitmq-server -y &>>$LOG_FILE
+dnf install rabbitmq-server -y
 # dnf install rabbitmq-server -y 2>&1 | tee -a $LOG_FILE
 Validate $? "Installing RabbitMQ Server"
 
