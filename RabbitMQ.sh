@@ -45,7 +45,6 @@ then
 else
     echo -e "$R rabbitmq.repo file  found! $N" | tee -a $LOG_FILE
     Validate $? "Adding RabbitMQ Repo"
-ec
 fi
 
 # cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
