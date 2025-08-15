@@ -37,7 +37,7 @@ read -s MYSQL_ROOT_PWD
 dnf install mysql-server -y &>>$LOG_FILE
 Validate $? "MYSQL Installation"
 
-systemctl enable mysql &>>$LOG_FILE
+systemctl enable mysqld &>>$LOG_FILE
 Validate $? "Enabling MYSQL Service"
 
 systemctl start mysqld &>>$LOG_FILE
