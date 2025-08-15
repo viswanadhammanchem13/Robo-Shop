@@ -37,7 +37,7 @@ read -s MYSQL_ROOT_PWD
 mkdir  -p /app
 Validate $? "Creating /app Dir"
 
-curl -o curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$LOG_FILE
+curl -l -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$LOG_FILE
 Validate $? "Downloading the Code"
 
 rm -rf /app/*
@@ -63,13 +63,18 @@ Validate $? "Enabling Shipping  Service"
 systemctl start shipping  &>>$LOG_FILE
 Validate $? "Starting Shipping  Service"
 
-dnf install mysql -y 
+dnf install mysql -y &>>$LOG_FILE
 Validate $? "Installing MYSQL Client"
 
-mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/schema.sql
-mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/app-user.sql 
-mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/master-data.sql
+mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/schema.sql &>>$LOG_FILE
+mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/app-user.sql &>>$LOG_FILE
+mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/master-data.sql &>>$LOG_FILE
 VALIDATE $? "Loading data into MySQL"
 
-systemctl restart shipping
-Validate $? "ReStarting Shipping  Service"
+systemctl restart shipping &>>$LOG_FILE
+Validate $? "Restarting Shipping  Service"
+
+END_TIME=$(date +%s)
+TOTAL_TIME=$(( $END_TIME - $START_TIME ))
+
+echo -e "Script exection completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FILE
