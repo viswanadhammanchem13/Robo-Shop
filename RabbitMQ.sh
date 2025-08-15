@@ -39,7 +39,7 @@ Validate (){ #Function Definition
 if [ ! -f rabbitmq.repo ] 
 then
     echo -e "$R rabbitmq.repo file not found! $N" | tee -a $LOG_FILE
-    cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
+    cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
     Validate $? "Adding RabbitMQ Repo"
     exit 1
 else
@@ -50,7 +50,7 @@ fi
 # cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
 # Validate $? "Copying RabbitMQ Repo"
 
-dnf install rabbitmq -y
+dnf install rabbitmq-server -y
 # dnf install rabbitmq-server -y 2>&1 | tee -a $LOG_FILE
 Validate $? "Installing RabbitMQ Server"
 
