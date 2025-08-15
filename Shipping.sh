@@ -35,7 +35,7 @@ Validate (){ #Function Definition
 }
 
 dnf install maven -y &>>$LOG_FILE
-VALIDATE $? "Installing Maven and Java"
+Validate $? "Installing Maven and Java"
 
 id roboshop
 if [ $? -eq 0 ]
