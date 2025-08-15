@@ -42,7 +42,7 @@ Validate $? "Enabling MYSQL Service"
 systemctl start mysqld &>>$LOG_FILE
 Validate $? "Starting MYSQL Service"
 
-mysql_secure_installation --set-root-pass $MySQL &>>$LOG_FILE
+mysql_secure_installation --set-root-pass $MYSQL_ROOT_PWD &>>$LOG_FILE
 Validate $? "Creating MYSQL Password"
 
 END_TIME=$(date +%s)
