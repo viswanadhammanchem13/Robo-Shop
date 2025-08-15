@@ -36,11 +36,23 @@ Validate (){ #Function Definition
     fi #Condition Ends
 }
 
-cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
-Validate $? "Copying RabbitMQ Repo"
+if [ ! -f rabbitmq.repo ] 
+then
+    echo -e "$R rabbitmq.repo file not found! $N" | tee -a $LOG_FILE
+    cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
+    Validate $? "Adding RabbitMQ Repo"
+    exit 1
+else
+    echo -e "$R rabbitmq.repo file  found! $N" | tee -a $LOG_FILE
+    Validate $? "Adding RabbitMQ Repo"
+ec
+fi
+
+# cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
+# Validate $? "Copying RabbitMQ Repo"
 
 dnf install rabbitmq-server -y &>>$LOG_FILE
-Validate $? "Installing RabbitMQ"
+Validate $? "Installing RabbitMQ Server"
 
 systemctl enable rabbitmq-server &>>$LOG_FILE
 systemctl start rabbitmq-server &>>$LOG_FILE
@@ -49,3 +61,8 @@ Validate $? "Enabling and Starting the RabbitMQ Service"
 rabbitmqctl add_user roboshop $RABBITMQ_PWD &>>$LOG_FILE
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
 Validate $? "Adding UN and PWD,Permissions Of the RabbitMQ"
+
+END_TIME=$(date +%s)
+TOTAL_TIME=$(( $END_TIME - $START_TIME ))
+
+echo -e "Script exection completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FILE
