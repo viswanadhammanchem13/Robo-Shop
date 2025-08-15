@@ -56,10 +56,11 @@ mkdir  -p /app
 Validate $? "Creating /app Dir"
 
 curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip &>>$LOG_FILE
+Validate $? "Downloding the code"
 
 rm -rf /app/*
 cd /app &>>$LOG_FILE
-unzip /tmp/user.zip &>>$LOG_FILE
+unzip /tmp/payment.zip &>>$LOG_FILE
 Validate $? "Unzip the Code"
 
 pip3 install -r requirements.txt &>>$LOG_FILE
