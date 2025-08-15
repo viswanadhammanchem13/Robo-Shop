@@ -44,13 +44,14 @@ then
     exit 1
 else
     echo -e "$R rabbitmq.repo file  found! $N" | tee -a $LOG_FILE
-    Validate $? "Adding RabbitMQ Repo"
+    Validate $? "RabbitMQ Repo is Already Added"
 fi
 
 # cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
 # Validate $? "Copying RabbitMQ Repo"
 
-dnf install rabbitmq-server -y &>>$LOG_FILE
+# dnf install rabbitmq-server -y &>>$LOG_FILE
+dnf install rabbitmq-server -y 2>&1 | tee -a $LOG_FILE
 Validate $? "Installing RabbitMQ Server"
 
 systemctl enable rabbitmq-server &>>$LOG_FILE
