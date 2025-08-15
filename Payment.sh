@@ -39,7 +39,7 @@ Validate (){ #Function Definition
 # dnf module enable nodejs:20 -y &>>$LOG_FILE
 # Validate $? "Enabling NodeJS:20"
 
-dnf install python3 gcc python3-devel -y -y &>>$LOG_FILE
+dnf install python3 gcc python3-devel  -y &>>$LOG_FILE
 Validate $? "Installling Python3"
 
 id roboshop
@@ -56,9 +56,6 @@ mkdir  -p /app
 Validate $? "Creating /app Dir"
 
 curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip &>>$LOG_FILE
-cd /app 
-unzip /tmp/payment.zip  &>>$LOG_FILE
-Validate $? "Downloading the Code"
 
 rm -rf /app/*
 cd /app &>>$LOG_FILE
