@@ -36,8 +36,8 @@ Validate (){ #Function Definition
     fi #Condition Ends
 }
 
-cp /rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
-Validate $? "Copying RabbitMQ"
+cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>$LOG_FILE
+Validate $? "Copying RabbitMQ Repo"
 
 dnf install rabbitmq-server -y &>>$LOG_FILE
 Validate $? "Installing RabbitMQ"
