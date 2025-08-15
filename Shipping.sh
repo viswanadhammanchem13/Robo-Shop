@@ -82,7 +82,7 @@ dnf install mysql -y &>>$LOG_FILE
 Validate $? "Installing MYSQL Client"
 
 mysql -h mysql.daws84s.site -u root -p$MYSQL_ROOT_PWD -e 'use cities' &>>$LOG_FILE
-if [ $? -ne 0 ]
+if [ $? -eq 0 ]
 then
     echo -e "Data is already loaded into MySQL ... $Y SKIPPING $N"
 else
