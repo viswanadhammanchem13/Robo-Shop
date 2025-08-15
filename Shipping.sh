@@ -23,7 +23,7 @@ else #If =0 Enter into else loop
     echo -e "$Y Please proceed the Installation $N" | tee -a $LOG_FILE #Prints this messages on Screen
 fi #Condition Ends
 
-echo "Please Enter Root Password to SetUp"
+echo "Please Enter Root Password to Setup:"
 read -s MYSQL_ROOT_PWD
 
 Validate (){ #Function Definition
@@ -81,7 +81,7 @@ Validate $? "Starting Shipping  Service"
 dnf install mysql -y &>>$LOG_FILE
 Validate $? "Installing MYSQL Client"
 
-mysql -h mysql.daws84s.site -u root -p$MYSQL_ROOT_PWD -e 'use cities' &>>$LOG_FILE
+mysql -h mysql.manchem.site -u root -p$MYSQL_ROOT_PWD -e 'use cities' &>>$LOG_FILE
 if [ $? -eq 0 ]
 then
     echo -e "Data is already loaded into MySQL ... $Y SKIPPING $N"
