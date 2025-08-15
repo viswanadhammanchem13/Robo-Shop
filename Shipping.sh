@@ -21,6 +21,9 @@ else #If =0 Enter into else loop
     echo -e "$Y Please proceed the Installation $N" | tee -a $LOG_FILE #Prints this messages on Screen
 fi #Condition Ends
 
+echo "Please Enter Root Password to SetUp"
+read -s MYSQL_ROOT_PWD
+
 Validate (){ #Function Definition
     if [ $1 -eq 0 ] #Checks If Exit code equls to Zero, Yes
     then #Enter into Loop
@@ -31,8 +34,18 @@ Validate (){ #Function Definition
     fi #Condition Ends
 }
 
-echo "Please Enter Root Password to SetUp"
-read -s MYSQL_ROOT_PWD
+dnf install maven -y &>>$LOG_FILE
+VALIDATE $? "Installing Maven and Java"
+
+id roboshop
+if [ $? -eq 0 ]
+then
+    echo "Roboshop user is already created...Skipping"
+else 
+    echo "Roboshop user is not created...Creating"
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
+    Validate $? "Creating Roboshop user"
+fi
 
 mkdir  -p /app
 Validate $? "Creating /app Dir"
