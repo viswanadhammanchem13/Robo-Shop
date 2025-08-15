@@ -81,9 +81,16 @@ Validate $? "Starting Shipping  Service"
 dnf install mysql -y &>>$LOG_FILE
 Validate $? "Installing MYSQL Client"
 
-mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/schema.sql &>>$LOG_FILE
-mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/app-user.sql &>>$LOG_FILE
-mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/master-data.sql &>>$LOG_FILE
+mysql -h mysql.daws84s.site -u root -p$MYSQL_ROOT_PWD -e 'use cities' &>>$LOG_FILE
+if [ $? -ne 0 ]
+then
+    echo -e "Data is Not loaded into MySQL ... $Y Loading $N"
+    mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/schema.sql &>>$LOG_FILE
+    mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/app-user.sql &>>$LOG_FILE
+    mysql -h mysql.manchem.site -uroot -p$MYSQL_ROOT_PWD < /app/db/master-data.sql &>>$LOG_FILE
+else
+    echo -e "Data is already loaded into MySQL ... $Y SKIPPING $N"
+fi
 Validate $? "Loading data into MySQL"
 
 systemctl restart shipping &>>$LOG_FILE
