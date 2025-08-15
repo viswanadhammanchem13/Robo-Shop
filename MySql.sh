@@ -24,11 +24,12 @@ fi #Condition Ends
 Validate (){ #Function Definition
     if [ $1 -eq 0 ] #Checks If Exit code equls to Zero, Yes
     then #Enter into Loop
-        echo -e "$G $2...... is suceefull $N"  | tee -a $LOG_FILE #Prints this messages on Screen
+        echo -e "$G $2...... is Successful $N"  | tee -a $LOG_FILE #Prints this messages on Screen
     else #Checks If Exit code != Zero, No
         echo -e " $R $2 ......is failed $N" | tee -a $LOG_FILE #Prints this messages on Screen
         exit 1 #Condition Exits and Entire Script Fails.
     fi #Condition Ends
+}
 
 echo "Please Enter Root Password to SetUp"
 read -s MYSQL_ROOT_PWD
@@ -45,7 +46,7 @@ Validate $? "Starting MYSQL Service"
 mysql_secure_installation --set-root-pass $MYSQL_ROOT_PWD &>>$LOG_FILE
 Validate $? "Creating MYSQL Password"
 
-# END_TIME=$(date +%s)
-# TOTAL_TIME=$(( $END_TIME - $START_TIME ))
+END_TIME=$(date +%s)
+TOTAL_TIME=$(( $END_TIME - $START_TIME ))
 
-# echo -e "Script exection completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FILE
+echo -e "Script exection completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FILE
