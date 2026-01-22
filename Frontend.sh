@@ -67,7 +67,7 @@ rm -rf /etc/nginx/nginx.conf &>>$LOG_FILE
 Validate $? "Remove default nginx conf"
 
 cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf &>>$LOG_FILE
-Validate $? "Coping Catalogue Service"
+Validate $? "Coping Catalogue Configuration"
 
 systemctl restart nginx &>>$LOG_FILE
 Validate $? "Restarting Nginx Service" 

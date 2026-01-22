@@ -1,5 +1,5 @@
 #!/bin/bash
-TIME=$(date)
+START_TIME=$(date)
 USERID=$(id -u) #Stores User UID
 R="\e[31m"
 G="\e[32m"
@@ -11,7 +11,7 @@ SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_Folder/$SCRIPT_NAME.log"
 mkdir -p $LOGS_Folder
 
-echo -e  "$R Script Executed at:$TIME $N" | tee -a $LOG_FILE # Tee command Display the content on Screen
+echo -e  "$R Script Executed at:$START_TIME $N" | tee -a $LOG_FILE # Tee command Display the content on Screen
 
 if [ $USERID -ne 0 ] #Checks Whether UID is = 0 or not
 then #!= 0 Enter into Loop
@@ -47,4 +47,9 @@ sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
 Validate $? "Editing MongoDB conf file for remote connections"
 
 systemctl restart mongod
-Validate $? "MongoDB Service ReStarted" 
+Validate $? "MongoDB Service ReStarted"
+
+END_TIME=$(date +%s)
+TOTAL_TIME=$(( $END_TIME - $START_TIME ))
+
+echo -e "Script exection completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FILE

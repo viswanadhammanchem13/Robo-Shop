@@ -45,4 +45,4 @@ Validate $? "Edited redis.conf to accept remote connections"
 
 systemctl enable redis &>>$LOG_FILE
 systemctl start redis &>>$LOG_FILE
-Validate $? "Starting Reddis Service"
+Validate $? "Starting Redis Service"
